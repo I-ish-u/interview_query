@@ -1,12 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { DataGrid } from '@mui/x-data-grid';
 
 
 export default function App() {
   const [row, setrow] = useState([]);
-  React.useEffect(() => {
+  useEffect(() => {
     const fetchdata = async () => {
-      const response = await fetch("https://jsonplaceholder.typicode.com/todos");
+      const apiUrl = `${import.meta.env.VITE_API_BASE_URL}/todos`
+      console.log(apiUrl, 'api url')
+      const response = await fetch(apiUrl);
       const data = await response.json();
       const transformeddata = data.map((e) => ({
         id: e.id,
